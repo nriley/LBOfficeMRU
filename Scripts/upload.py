@@ -27,6 +27,7 @@ def archive_items(product_name, version, dir_path, items):
     temp_dir_path = tempfile.mkdtemp(prefix='upload_' + product_name)
     subprocess.check_call(['/bin/cp', '-Rp'] + items + [temp_dir_path])
 
+    # note: a single action can be zipped into a .lbaction file instead
     archive_path = os.path.join(dir_path, '%s-%s.zip' % (product_name, version))
     subprocess.check_call(['/usr/bin/ditto', '-ck', temp_dir_path, archive_path])
     shutil.rmtree(temp_dir_path)
@@ -58,7 +59,7 @@ def upload_release(repo, version, archive_path, github_access_token):
                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     release_json_data, _ = releases_api.communicate(json.dumps(release_json))
     release_json = json.loads(release_json_data)
-    
+
     html_url = release_json['html_url']
     upload_url = release_json['upload_url'].split('{', 1)[0]
     upload_url = expand_url_template(upload_url, dict(name=os.path.basename(archive_path),
