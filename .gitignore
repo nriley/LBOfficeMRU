@@ -67,3 +67,6 @@ target/
 
 # DS stuff
 .DS_Store
+
+# OS X code signatures
+_CodeSignature/
