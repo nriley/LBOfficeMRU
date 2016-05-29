@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIconFile</key>
+	<string>com.microsoft.Powerpoint:POTX</string>
+	<key>CFBundleIdentifier</key>
+	<string>net.sabi.LaunchBar.action.RecentPowerPointDocuments</string>
+	<key>CFBundleName</key>
+	<string>Recent PowerPoint Documents</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>LBAssociatedApplication</key>
+	<string>com.microsoft.Powerpoint</string>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBAuthor</key>
+		<string>Nicholas Riley</string>
+		<key>LBEmail</key>
+		<string>launchbar@sabi.net</string>
+		<key>LBRequirements</key>
+		<string>Microsoft PowerPoint 15 (Office 365 or 2016)</string>
+		<key>LBResult</key>
+		<string>The list of recently opened PowerPoint documents.</string>
+		<key>LBSummary</key>
+		<string>This action returns a list of recently opened PowerPoint documents.</string>
+		<key>LBTwitter</key>
+		<string>@nriley</string>
+		<key>LBWebsiteURL</key>
+		<string>https://sabi.net/nriley/software/#launchbar</string>
+	</dict>
+	<key>LBRequiredApplication</key>
+	<string>com.microsoft.Powerpoint</string>
+	<key>LBRequirements</key>
+	<string>Microsoft PowerPoint 15 (Office 365 or 2016)</string>
+	<key>LBResult</key>
+	<string>The list of recently opened PowerPoint documents.</string>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBKeepWindowActive</key>
+			<true/>
+			<key>LBResultType</key>
+			<string>unknown</string>
+			<key>LBReturnsResult</key>
+			<true/>
+			<key>LBScriptName</key>
+			<string>default.py</string>
+		</dict>
+	</dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.10</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2016 Nicholas Riley</string>
+</dict>
+</plist>
