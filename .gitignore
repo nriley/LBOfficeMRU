@@ -70,3 +70,10 @@ target/
 
 # OS X code signatures
 _CodeSignature/
+
+# Xcode junk
+*.xcuserstate
+
+# Packaging
+LBOfficeMRU-*/
+LBOfficeMRU-*.zip
