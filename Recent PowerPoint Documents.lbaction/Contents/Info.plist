@@ -16,6 +16,10 @@
 	<dict>
 		<key>LBAuthor</key>
 		<string>Nicholas Riley</string>
+		<key>LBChangelog</key>
+		<string></string>
+		<key>LBDownloadURL</key>
+		<string>https://github.com/nriley/LBOfficeMRU/releases/download/v1.0b1/LBOfficeMRU-1.0b1.zip</string>
 		<key>LBEmail</key>
 		<string>launchbar@sabi.net</string>
 		<key>LBRequirements</key>
@@ -26,6 +30,8 @@
 		<string>This action returns a list of recently opened PowerPoint documents.</string>
 		<key>LBTwitter</key>
 		<string>@nriley</string>
+		<key>LBUpdateURL</key>
+		<string>https://raw.githubusercontent.com/nriley/LBOfficeMRU/master/Recent%20PowerPoint%20Documents.lbaction/Contents/Info.plist</string>
 		<key>LBWebsiteURL</key>
 		<string>https://sabi.net/nriley/software/#launchbar</string>
 	</dict>
