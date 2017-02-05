@@ -9,7 +9,7 @@
 	<key>CFBundleName</key>
 	<string>Recent OneNote Documents</string>
 	<key>CFBundleVersion</key>
-	<string>1.0d1</string>
+	<string>1.0b2</string>
 	<key>LBAssociatedApplication</key>
 	<string>com.microsoft.onenote.mac</string>
 	<key>LBDescription</key>
@@ -19,7 +19,7 @@
 		<key>LBChangelog</key>
 		<string></string>
 		<key>LBDownloadURL</key>
-		<string>https://github.com/nriley/LBOfficeMRU/releases/download/v1.0b1/LBOfficeMRU-1.0b1.zip</string>
+		<string>https://github.com/nriley/LBOfficeMRU/releases/download/v1.0b2/LBOfficeMRU-1.0b2.zip</string>
 		<key>LBEmail</key>
 		<string>launchbar@sabi.net</string>
 		<key>LBRequirements</key>
