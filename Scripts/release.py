@@ -45,18 +45,19 @@ def archive_bundles(product_name, version, bundle_paths):
     git('commit', '-am', version)
 
     temp_dir_path = tempfile.mkdtemp(prefix='upload_' + product_name)
-    git('checkout-index', '--prefix=%s/' % temp_dir_path, *file_paths)
+    archive_dir_path = os.path.join(temp_dir_path, '%s %s' % (product_name, version), '')
+    git('checkout-index', '--prefix=' + archive_dir_path, *file_paths)
     git('reset', 'HEAD~')
 
     for py_path in (f for f in file_paths if f.endswith('.py')):
-        py_path = os.path.join(temp_dir_path, py_path)
+        py_path = os.path.join(archive_dir_path, py_path)
         compileall.compile_file(py_path)
         # can't delete default.py because LaunchBar won't let me point at a .pyc
         if os.path.split(py_path)[1] != 'default.py':
             os.unlink(py_path)
 
     for bundle_path in bundle_paths:
-        sign_bundle(os.path.join(temp_dir_path, bundle_path))
+        sign_bundle(os.path.join(archive_dir_path, bundle_path))
 
     # note: a single action can be zipped into a .lbaction file instead
     archive_path = os.path.join(project_path(), '%s-%s.zip' % (product_name, version))
