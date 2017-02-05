@@ -1,0 +1,1 @@
+../../../Recent Word Documents.lbaction/Contents/Scripts/mruservice.py
