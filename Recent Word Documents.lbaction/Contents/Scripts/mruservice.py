@@ -48,7 +48,7 @@ def items_for_app(app_name, app_bundle_id, app_url_prefix, extension_to_icon_nam
         items.append(dict(title=filename,
                           subtitle=document['Path'],
                           url='%s%s' % (app_url_prefix,
-                                        urllib.quote(document['DocumentUrl'], safe=':/')),
+                                        urllib.quote(document['DocumentUrl'].encode('utf-8'), safe=':/')),
                           icon=app_bundle_id,
                           Timestamp=document['Timestamp']))
 
