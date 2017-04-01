@@ -9,7 +9,7 @@
 	<key>CFBundleName</key>
 	<string>Recent OneNote Documents</string>
 	<key>CFBundleVersion</key>
-	<string>1.0b2</string>
+	<string>1.0</string>
 	<key>LBAssociatedApplication</key>
 	<string>com.microsoft.onenote.mac</string>
 	<key>LBDescription</key>
@@ -17,9 +17,12 @@
 		<key>LBAuthor</key>
 		<string>Nicholas Riley</string>
 		<key>LBChangelog</key>
-		<string></string>
+		<string>
+			1.0: Fixes crash with Unicode characters in cloud-hosted document names.
+			1.0b2: Adds a OneNote action.
+		</string>
 		<key>LBDownloadURL</key>
-		<string>https://github.com/nriley/LBOfficeMRU/releases/download/v1.0b2/LBOfficeMRU-1.0b2.zip</string>
+		<string>https://github.com/nriley/LBOfficeMRU/releases/download/v1.0/LBOfficeMRU-1.0.zip</string>
 		<key>LBEmail</key>
 		<string>launchbar@sabi.net</string>
 		<key>LBRequirements</key>
