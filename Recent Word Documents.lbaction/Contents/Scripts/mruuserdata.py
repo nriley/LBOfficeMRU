@@ -31,6 +31,9 @@ def items_for_app(app_name):
     for url, timestamp in conn.execute(SQL, (app_name,)):
     	# urlsplit should not ordinarily raise
     	# if it does, let it through so the user knows and can report an issue
-    	items.append(dict(path=urlsplit(url).path, Timestamp=timestamp))
+    	path = urlsplit(url).path
+    	if not os.path.exists(path):
+    		continue
+    	items.append(dict(path=path, Timestamp=timestamp))
 
     return items
