@@ -1,3 +1,4 @@
+from urlparse import urlsplit
 import os, sqlite3
 
 __all__ = ('items_for_app',)
@@ -25,5 +26,11 @@ def items_for_app(app_name):
     conn = sqlite3.connect(os.path.expanduser(
         '~/Library/Group Containers/UBF8T346G9.Office/MicrosoftRegistrationDB.reg'))
 
-    return [dict(path=path, Timestamp=timestamp) for path, timestamp in conn.execute(SQL, (app_name,))
-            if os.path.exists(path)]
+    items = []
+
+    for url, timestamp in conn.execute(SQL, (app_name,)):
+    	# urlsplit should not ordinarily raise
+    	# if it does, let it through so the user knows and can report an issue
+    	items.append(dict(path=urlsplit(url).path, Timestamp=timestamp))
+
+    return items
