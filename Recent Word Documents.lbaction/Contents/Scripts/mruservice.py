@@ -3,9 +3,15 @@ import json, os, sys, urllib
 __all__ = ('items_for_app',)
 
 def items_for_app(app_name, app_bundle_id, app_url_prefix, extension_to_icon_name=None):
-    mruservicecache_path = os.path.expanduser(
-        '~/Library/Containers/%s/Data/Library/Application Support/Microsoft/AppData/Office/15.0/MruServiceCache'
-        % app_bundle_id)
+    mruservicecache_paths = (os.path.expanduser(path) % app_bundle_id for path in (
+        '~/Library/Containers/%s/Data/Library/Application Support/Microsoft/Office/16.0/MruServiceCache',
+        '~/Library/Containers/%s/Data/Library/Application Support/Microsoft/AppData/Office/15.0/MruServiceCache'))
+
+    for mruservicecache_path in mruservicecache_paths:
+        if os.path.isdir(mruservicecache_path):
+            break
+    else:
+        return []
 
     documents = []
 
