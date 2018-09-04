@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from urlparse import urlsplit
 import os, sqlite3
 
@@ -26,14 +27,16 @@ def items_for_app(app_name):
     conn = sqlite3.connect(os.path.expanduser(
         '~/Library/Group Containers/UBF8T346G9.Office/MicrosoftRegistrationDB.reg'))
 
-    items = []
+    items = OrderedDict()
 
     for url, timestamp in conn.execute(SQL, (app_name,)):
     	# urlsplit should not ordinarily raise
     	# if it does, let it through so the user knows and can report an issue
     	path = urlsplit(url).path
+    	if path in items:
+    		continue
     	if not os.path.exists(path):
     		continue
-    	items.append(dict(path=path, Timestamp=timestamp))
+    	items[path] = timestamp
 
-    return items
+    return [dict(path=path, Timestamp=timestamp) for path, timestamp in items.iteritems()]
