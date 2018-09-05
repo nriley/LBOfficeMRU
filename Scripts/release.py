@@ -123,6 +123,8 @@ def release(version, github_access_token):
     html_url = upload_release('nriley/LBOfficeMRU', version, archive_path, github_access_token)
     webbrowser.open(html_url)
 
+    print "Make sure changes are committed and pushed before saving release as final!"
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Build and optionally release to GitHub.')
     parser.add_argument('version')
