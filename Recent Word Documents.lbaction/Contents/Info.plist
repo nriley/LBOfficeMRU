@@ -9,7 +9,7 @@
 	<key>CFBundleName</key>
 	<string>Recent Word Documents</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>LBAssociatedApplication</key>
 	<string>com.microsoft.Word</string>
 	<key>LBDescription</key>
@@ -23,7 +23,7 @@
 			1.0b2: Adds support for cloud-hosted documents (e.g. SharePoint, OneDrive). Always sorts most recent documents first. Adds support for automatic updates if you have the Action Updates action installed.
 		</string>
 		<key>LBDownloadURL</key>
-		<string>https://github.com/nriley/LBOfficeMRU/releases/download/v1.0/LBOfficeMRU-1.0.zip</string>
+		<string>https://github.com/nriley/LBOfficeMRU/releases/download/v1.1/LBOfficeMRU-1.1.zip</string>
 		<key>LBEmail</key>
 		<string>launchbar@sabi.net</string>
 		<key>LBRequirements</key>
