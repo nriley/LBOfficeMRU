@@ -88,8 +88,7 @@ def upload_release(repo, version, archive_path, github_access_token):
     package_version = Version(version)
 
     releases_url = expand_url_template(
-        'https://api.github.com/repos/%s/releases', repo,
-        access_token=github_access_token)
+        'https://api.github.com/repos/%s/releases', repo)
 
     release_name = tag_for_version(version)
     release_json = dict(tag_name=release_name, target_commitish='master',
@@ -98,9 +97,10 @@ def upload_release(repo, version, archive_path, github_access_token):
 
     print(releases_url)
 
-    releases_api = subprocess.Popen(['/usr/bin/curl', '--data', '@-', releases_url],
-                                    stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                    encoding='utf-8')
+    releases_api = subprocess.Popen(
+        ['/usr/bin/curl', '-u', 'nriley:' + github_access_token,
+         '--data', '@-', releases_url],
+        stdin=subprocess.PIPE, stdout=subprocess.PIPE, encoding='utf-8')
     release_json_data, _ = releases_api.communicate(json.dumps(release_json))
     release_json = json.loads(release_json_data)
 
