@@ -1,4 +1,5 @@
-import json, os, sys, urllib
+import json, os, sys
+from urllib.parse import quote
 
 __all__ = ('items_for_app',)
 
@@ -27,9 +28,9 @@ def items_for_app(app_name, app_bundle_id, app_url_prefix, extension_to_icon_nam
                 continue
 
             try:
-                documents += json.load(file(documents_path))
-            except ValueError, e:
-                print >> sys.stderr, "Can't parse documents MRU cache:", e
+                documents += json.load(open(documents_path))
+            except ValueError as e:
+                print("Can't parse documents MRU cache:", e, file=sys.stderr)
                 continue
 
     items = []
@@ -54,7 +55,7 @@ def items_for_app(app_name, app_bundle_id, app_url_prefix, extension_to_icon_nam
         items.append(dict(title=filename,
                           subtitle=document['Path'],
                           url='%s%s' % (app_url_prefix,
-                                        urllib.quote(document['DocumentUrl'].encode('utf-8'), safe=':/')),
+                                        quote(document['DocumentUrl'].encode('utf-8'), safe=':/')),
                           icon=app_bundle_id,
                           Timestamp=document['Timestamp']))
 

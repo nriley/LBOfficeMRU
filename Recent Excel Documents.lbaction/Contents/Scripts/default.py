@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import json, operator
 import mruservice, mruuserdata
@@ -16,4 +16,4 @@ items += mruservice.items_for_app(APP_NAME, APP_BUNDLE_ID, APP_URL_PREFIX, EXTEN
 
 items.sort(key=operator.itemgetter('Timestamp'), reverse=True)
 
-print json.dumps(items)
+print(json.dumps(items))

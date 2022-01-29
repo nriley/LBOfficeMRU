@@ -1,8 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import argparse
 import compileall
-import distutils.version
 import glob
 import json
 import os
@@ -11,33 +10,41 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import urllib
 import webbrowser
+
+from packaging.version import Version
+from urllib.parse import quote, urlencode
 
 def update_bundle_version(bundle_path, version, repo):
     info_plist_path = os.path.join(bundle_path, 'Contents', 'Info.plist')
-    info_plist = plistlib.readPlist(info_plist_path)
+    with open(info_plist_path, 'rb') as plist_file:
+        info_plist = plistlib.load(plist_file)
+
     info_plist['CFBundleVersion'] = version
     info_plist['LBDescription']['LBDownloadURL'] = expand_url_template(
         'https://github.com/%s/releases/download/%s/%s-%s.zip', repo,
         tag_for_version(version), repo.split('/', 1)[1], version)
 
-    plistlib.writePlist(info_plist, info_plist_path)
+    with open(info_plist_path, 'wb') as plist_file:
+        plistlib.dump(info_plist, plist_file)
 
 def sign_bundle(bundle_path):
     subprocess.check_call(['/usr/bin/codesign', '-fs', 'Developer ID Application: Nicholas Riley',
                            bundle_path])
 
+def output(*args):
+    return subprocess.check_output(args, encoding='utf-8')
+
 PROJECT_PATH = None
 def project_path():
     global PROJECT_PATH
     if PROJECT_PATH is None:
-        PROJECT_PATH = subprocess.check_output(['/usr/bin/git', '-C', os.path.dirname(__file__),
-                                                'rev-parse', '--show-toplevel']).rstrip('\n')
+        PROJECT_PATH = output('/usr/bin/git', '-C', os.path.dirname(__file__),
+                             'rev-parse', '--show-toplevel').rstrip('\n')
     return PROJECT_PATH
 
 def git(*args):
-    return subprocess.check_output(['/usr/bin/git', '-C', project_path()] + list(args))
+    return output('/usr/bin/git', '-C', project_path(), *args)
 
 def archive_bundles(product_name, version, bundle_paths):
     file_paths = git('ls-files', '-z', *bundle_paths).rstrip('\0').split('\0')
@@ -69,16 +76,16 @@ def archive_bundles(product_name, version, bundle_paths):
 def expand_url_template(url_template, *args, **query):
     url = url_template
     if args:
-        url = url % tuple(map(urllib.quote, args))
+        url = url % tuple(map(quote, args))
     if query:
-        url += '?' + urllib.urlencode(query)
+        url += '?' + urlencode(query)
     return url
 
 def tag_for_version(version):
     return 'v' + version
 
 def upload_release(repo, version, archive_path, github_access_token):
-    strict_version = distutils.version.StrictVersion(version)
+    package_version = Version(version)
 
     releases_url = expand_url_template(
         'https://api.github.com/repos/%s/releases', repo,
@@ -87,12 +94,13 @@ def upload_release(repo, version, archive_path, github_access_token):
     release_name = tag_for_version(version)
     release_json = dict(tag_name=release_name, target_commitish='master',
                         name=release_name, body='', draft=True,
-                        prerelease=bool(strict_version.prerelease))
+                        prerelease=package_version.is_prerelease)
 
-    print releases_url
+    print(releases_url)
 
     releases_api = subprocess.Popen(['/usr/bin/curl', '--data', '@-', releases_url],
-                                    stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+                                    stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                    encoding='utf-8')
     release_json_data, _ = releases_api.communicate(json.dumps(release_json))
     release_json = json.loads(release_json_data)
 
@@ -123,7 +131,7 @@ def release(version, github_access_token):
     html_url = upload_release('nriley/LBOfficeMRU', version, archive_path, github_access_token)
     webbrowser.open(html_url)
 
-    print "Make sure changes are committed and pushed before saving release as final!"
+    print("Make sure changes are committed and pushed before saving release as final!")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Build and optionally release to GitHub.')

@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from urlparse import urlsplit
+from urllib.parse import urlsplit
 import os, sqlite3
 
 __all__ = ('items_for_app',)
@@ -39,4 +39,4 @@ def items_for_app(app_name):
     		continue
     	items[path] = timestamp
 
-    return [dict(path=path, Timestamp=timestamp) for path, timestamp in items.iteritems()]
+    return [dict(path=path, Timestamp=timestamp) for path, timestamp in items.items()]
