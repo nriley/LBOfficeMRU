@@ -1,0 +1,2 @@
+packaging>=21.3
+pyinstaller>=4.8
