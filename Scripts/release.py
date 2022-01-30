@@ -135,9 +135,10 @@ def upload_release(repo, version, archive_path, github_access_token):
     html_url = release_json['html_url']
     upload_url = release_json['upload_url'].split('{', 1)[0]
     upload_url = expand_url_template(upload_url,
-        name=os.path.basename(archive_path), access_token=github_access_token)
+        name=os.path.basename(archive_path))
     subprocess.check_call(
-        ['/usr/bin/curl', '-H', 'Content-Type: application/zip',
+        ['/usr/bin/curl', '-u', 'nriley:' + github_access_token,
+         '-H', 'Content-Type: application/zip',
          '--data-binary', f'@{archive_path}', upload_url])
 
     return html_url
