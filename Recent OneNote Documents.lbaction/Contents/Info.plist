@@ -18,6 +18,7 @@
 		<string>Nicholas Riley</string>
 		<key>LBChangelog</key>
 		<string>
+			1.2: Bundles Python 3.10.2 in preparation for macOS 12.3 removing Python 2.
 			1.1: Adds support for OneNote 16.
 			1.0: Fixes crash with Unicode characters in cloud-hosted document names.
 			1.0b2: Adds a OneNote action.
@@ -62,6 +63,6 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>10.10</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2016–18 Nicholas Riley</string>
+	<string>Copyright © 2016–22 Nicholas Riley</string>
 </dict>
 </plist>

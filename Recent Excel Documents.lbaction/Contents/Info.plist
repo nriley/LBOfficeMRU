@@ -18,6 +18,7 @@
 		<string>Nicholas Riley</string>
 		<key>LBChangelog</key>
 		<string>
+			1.2: Bundles Python 3.10.2 in preparation for macOS 12.3 removing Python 2.
 			1.1: Adds support for Office 16/2019.
 			1.0: Fixes crash with Unicode characters in cloud-hosted document names.
 			1.0b2: Adds support for cloud-hosted documents (e.g. SharePoint, OneDrive). Always sorts most recent documents first. Adds support for automatic updates if you have the Action Updates action installed.
@@ -27,7 +28,7 @@
 		<key>LBEmail</key>
 		<string>launchbar@sabi.net</string>
 		<key>LBRequirements</key>
-		<string>Microsoft Excel 15 or 16 (Office 365, 2016 or 2019)</string>
+		<string>Microsoft Excel 15 or 16 (Office 365, 2016, 2019 or 2021)</string>
 		<key>LBResult</key>
 		<string>The list of recently opened Excel documents.</string>
 		<key>LBSummary</key>
@@ -42,7 +43,7 @@
 	<key>LBRequiredApplication</key>
 	<string>com.microsoft.Excel</string>
 	<key>LBRequirements</key>
-	<string>Microsoft Excel 15 or 16 (Office 365, 2016 or 2019)</string>
+	<string>Microsoft Excel 15 or 16 (Office 365, 2016, 2019 or 2021)</string>
 	<key>LBResult</key>
 	<string>The list of recently opened Excel documents.</string>
 	<key>LBScripts</key>
@@ -62,6 +63,6 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>10.10</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2016–18 Nicholas Riley</string>
+	<string>Copyright © 2016–22 Nicholas Riley</string>
 </dict>
 </plist>
