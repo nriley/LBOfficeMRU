@@ -160,6 +160,7 @@ def release(version, github_access_token):
     html_url = upload_release('nriley/LBOfficeMRU', version, archive_path, github_access_token)
     webbrowser.open(html_url)
 
+    print()
     print("Make sure changes are committed and pushed before saving release as final!")
 
 if __name__ == '__main__':
