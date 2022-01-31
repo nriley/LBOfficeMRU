@@ -158,6 +158,9 @@ def release(version, github_access_token):
 
     archive_path = archive_bundles('LBOfficeMRU', version, action_paths)
 
+    subprocess.check_call(['/usr/bin/xcrun', 'notarytool', 'submit', archive_path,
+                           '--keychain-profile', 'Notarization', '--wait'])
+
     if github_access_token is None:
         return
 
