@@ -84,6 +84,8 @@ def archive_bundles(product_name, version, bundle_paths):
         contents_path = archive_bundle_path / 'Contents'
         scripts_path = contents_path / 'Scripts'
         default_script_name, exec_name = update_bundle_default_script(archive_bundle_path)
+        with info_plist(archive_bundle_path) as info:
+            bundle_identifier = info['CFBundleIdentifier']
 
         PyInstaller.__main__.run([
             str(scripts_path / default_script_name),
@@ -93,7 +95,9 @@ def archive_bundles(product_name, version, bundle_paths):
             '--clean',
             '--target-architecture', 'universal2',
             '--workpath', str(work_dir_path),
-            '--specpath', str(work_dir_path)
+            '--specpath', str(work_dir_path),
+            '--osx-bundle-identifier', bundle_identifier,
+            '--codesign-identity', 'Developer ID Application: Nicholas Riley'
         ])
 
         staging_path = contents_path / exec_name
